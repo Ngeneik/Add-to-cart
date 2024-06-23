@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+    <section id="checkout" class="checkout">
+        <div class="container">
+            <h2>Order Details</h2>
+            <form id="orderDetailsForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="delivery">Delivery Option:</label>
+                <div class="delivery-option">
+                    <input type="radio" id="insideLagos" name="delivery" value="4000" required>
+                    <label for="insideLagos">Inside Lagos (₦4000)</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" id="outsideLagos" name="delivery" value="6000" required>
+                    <label for="outsideLagos">Outside Lagos (₦6000)</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" id="pickup" name="delivery" value="0" required>
+                    <label for="pickup">Pick up in store (Free)</label>
+                </div>
+
+                <button type="submit">Continue to Payment</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        const cartDetails = JSON.parse(sessionStorage.getItem('cartDetails'));
+        if (!cartDetails) {
+            alert('No cart details found. Please start your order again.');
+            window.location.href = 'index.html';
+        }
+
+        document.getElementById('orderDetailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const delivery = document.querySelector('input[name="delivery"]:checked').value;
+
+            sessionStorage.setItem('orderDetails', JSON.stringify({ name, email, phone, address, delivery, cartDetails }));
+            window.location.href = 'payment.html';
+        });
+    </script>
+</body>
+</html>

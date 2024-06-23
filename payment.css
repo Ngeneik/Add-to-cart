@@ -1,0 +1,70 @@
+/* Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Header */
+h2 {
+    margin-bottom: 20px;
+    color: #444;
+    font-weight: 600;
+}
+
+/* Order Summary */
+#orderSummary {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+#orderSummary p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+#orderSummary p span {
+    font-weight: 600;
+}
+
+/* Pay Now Button */
+#payNowBtn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#payNowBtn:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    #orderSummary p {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="thankyou.css">
+</head>
+<body>
+    <section id="order-confirmation" class="order-confirmation">
+        <div class="container">
+            <h2>Thank You for Your Purchase!</h2>
+            <p>Your order has been successfully placed. Below are your order details:</p>
+            <div id="orderDetails" class="order-details"></div>
+            <button onclick="window.location.href='index.html'" class="home-btn">Return to Home</button>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+            if (!orderDetails) {
+                alert('No order details found. Please start your order again.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const productPrice = orderDetails.cartDetails.reduce((sum, item) => sum + item.price, 0);
+            const totalAmount = productPrice + parseInt(orderDetails.delivery);
+
+            document.getElementById('orderDetails').innerHTML = `
+                <p><strong>Name:</strong> ${orderDetails.name}</p>
+                <p><strong>Email:</strong> ${orderDetails.email}</p>
+                <p><strong>Phone:</strong> ${orderDetails.phone}</p>
+                <p><strong>Address:</strong> ${orderDetails.address}</p>
+                <p><strong>Products:</strong></p>
+                <ul class="product-list">${orderDetails.cartDetails.map(item => `<li>${item.description} - ₦${item.price}</li>`).join('')}</ul>
+                <p><strong>Delivery Fee:</strong> ₦${orderDetails.delivery}</p>
+                <p><strong>Total Amount:</strong> ₦${totalAmount}</p>
+            `;
+        });
+    </script>
+</body>
+</html>

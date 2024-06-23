@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <main>
+        <section class="orders">
+            <h2>All Orders</h2>
+            <div id="orderList" class="order-list">
+                <!-- Order details will be dynamically populated here -->
+            </div>
+        </section>
+    </main>
+    <script>
+        // Fetch orders data from your backend server
+fetch('your-backend-url/orders')
+    .then(response => response.json())
+    .then(data => {
+        // Iterate over each order and generate HTML
+        data.forEach(order => {
+            const orderElement = document.createElement('div');
+            orderElement.classList.add('order');
+            orderElement.innerHTML = `
+                <p>Order ID: ${order.id}</p>
+                <p>Customer Name: ${order.customerName}</p>
+                <p>Email: ${order.email}</p>
+                <p>Items Purchased: ${order.items.join(', ')}</p>
+                <p>Total Amount: ${order.totalAmount}</p>
+            `;
+            document.getElementById('orderList').appendChild(orderElement);
+        });
+    })
+    .catch(error => console.error('Error fetching orders:', error));
+
+    </script>
+</body>
+</html>
